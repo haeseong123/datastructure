@@ -1,6 +1,6 @@
 package interface_from;
 
-public interface List<E> {
+public interface List<E> extends Iterable<E>{
     /**
      * 리스트에 요소 추가
      *
@@ -63,7 +63,7 @@ public interface List<E> {
      * 특정 요소가 존재할 경우 {@code true}
      * 특정 요소가 존재하지 않는 경우 {@code false}
      */
-    boolean contains(Object e);
+    boolean contains(Object o);
 
     /**
      * 특정 요소가 리스트의 몇 번째 위치에 있는지 반환
@@ -72,7 +72,7 @@ public interface List<E> {
      * @return 리스트에서 처음으로 요소와 일치하는 위치를 반환
      * 만약 일치하는 요소가 없을 경우 -1을 반환
      */
-    int indexOf(Object e);
+    int indexOf(Object o);
 
     /**
      * 리스트에 있는 요소의 개수를 반환

@@ -1,81 +1,102 @@
 package structure;
 
+import interface_from.List;
+
 import java.util.Iterator;
 
-public class DynamicArray<E> implements Iterable<E> {
+public class DynamicArray<E> implements List<E> {
     private static final int DEFAULT_CAPACITY = 10;
-    private Object[] elements;
-    private int size = 0;
+    private Object[] elementData;
+    private int size;
 
     public DynamicArray() {
-        elements = new Object[DEFAULT_CAPACITY];
+        elementData = new Object[DEFAULT_CAPACITY];
+        size = 0;
     }
 
     public DynamicArray(int capacity) {
         if (capacity >= 0) {
-            elements = new Object[capacity];
+            elementData = new Object[capacity];
+            size = 0;
         } else {
             throw new IllegalArgumentException("Illegal argument: " +
                     capacity);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public E get(int index) {
-        checkIndex(index, size);
-        return (E) elements[index];
-    }
-
+    @Override
     public boolean add(E e) {
-        if (size >= elements.length) {
-            elements = grow();
+        if (size >= elementData.length) {
+            elementData = grow();
         }
-        elements[size++] = e;
+        elementData[size++] = e;
         return true;
     }
 
+    @Override
+    public void add(int index, E e) {
+        checkIndex(index, size);
+        if (size == elementData.length) {
+            elementData = grow();
+        }
+        System.arraycopy(
+                elementData, index,
+                elementData, index + 1,
+                size - index);
+        elementData[index] = e;
+        size++;
+    }
+
+    @Override
+    public E remove(int index) {
+        checkIndex(index, size);
+
+        @SuppressWarnings("unchecked")
+        E oldValue = (E) elementData[index];
+        fastRemove(index);
+
+        return oldValue;
+    }
+
+    @Override
     public boolean remove(Object o) {
         int index = indexOf(o);
-        if (index == -1) {
+        if (index < 0) {
             return false;
         }
         fastRemove(index);
         return true;
     }
 
-    public E remove(int index) {
+    @SuppressWarnings("unchecked")
+    @Override
+    public E get(int index) {
         checkIndex(index, size);
-
-        @SuppressWarnings("unchecked")
-        E oldValue = (E) elements[index];
-        fastRemove(index);
-
-        return oldValue;
+        return (E) elementData[index];
     }
 
+    @Override
+    public void set(int index, E e) {
+        checkIndex(index, size);
+        elementData[index] = e;
+    }
+
+    @Override
     public boolean contains(Object o) {
         return indexOf(o) >= 0;
     }
 
-    public int size() {
-        return size;
-    }
-
-    public void clear() {
-        for (int to = size, i = size = 0; i < to; i++)
-            elements[i] = null;
-    }
-
+    @Override
     public int indexOf(Object o) {
         if (o == null) {
             for (int i = 0; i < size; i++) {
-                if (elements[i] == null) {
+                if (elementData[i] == null) {
                     return i;
                 }
             }
         } else {
             for (int i = 0; i < size; i++) {
-                if (o.equals(elements[i])) {
+                if (o.equals(elementData[i])) {
                     return i;
                 }
             }
@@ -83,14 +104,46 @@ public class DynamicArray<E> implements Iterable<E> {
         return -1;
     }
 
-    private Object[] grow() {
-        int newCapacity = getNewCapacity(elements.length);
-        return arrayCopy(elements, 0,
-                new Object[newCapacity], 0,
-                elements.length);
+    @Override
+    public int size() {
+        return size;
     }
 
-    private int getNewCapacity(int oldCapacity) {
+    @Override
+    public boolean isEmpty() {
+        return size <= 0;
+    }
+
+    @Override
+    public void clear() {
+        size = 0;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            private int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < size && elementData[currentIndex] != null;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public E next() {
+                return (E) elementData[currentIndex++];
+            }
+        };
+    }
+
+    private Object[] grow() {
+        Object[] newEs = new Object[newCapacity(elementData.length)];
+        System.arraycopy(elementData, 0, newEs, 0, elementData.length);
+        return newEs;
+    }
+
+    private int newCapacity(int oldCapacity) {
         // old 케파가 굳이 바뀌지 않아도 되는 경우
         if (oldCapacity - size > 0) {
             return oldCapacity;
@@ -109,33 +162,11 @@ public class DynamicArray<E> implements Iterable<E> {
         }
     }
 
+    // 인덱스 범위 검사 안 함
     private void fastRemove(int index) {
-        if ((size - 1) == index) {
-            elements[--size] = null;
-        } else {
-            Object[] newArray = new Object[size - 1];
-
-            if (index > 0) {
-                newArray = arrayCopy(elements, 0, newArray, 0, index);
-            }
-            newArray = arrayCopy(elements, index + 1, newArray, index, size - index - 1);
-            elements = newArray;
-            size--;
-        }
-    }
-
-    private Object[] arrayCopy(Object[] src, int srcPos, Object[] dest, int destPos, int length) {
-        if (src == null || dest == null) {
-            throw new NullPointerException();
-        }
-        checkIndex(srcPos + length - 1, src.length);
-        checkIndex(destPos + length - 1, dest.length);
-
-        for (int i = 0; i < length; i++) {
-            dest[destPos + i] = src[srcPos + i];
-        }
-
-        return dest;
+        if ((size - 1) > index)
+            System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
+        elementData[size--] = null;
     }
 
     private void checkIndex(int index, int size) {
@@ -144,23 +175,5 @@ public class DynamicArray<E> implements Iterable<E> {
         } else if (index >= size) {
             throw new IndexOutOfBoundsException("index should be within size");
         }
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return new Iterator<>() {
-            private int currentIndex = 0;
-
-            @Override
-            public boolean hasNext() {
-                return currentIndex < size && elements[currentIndex] != null;
-            }
-
-            @SuppressWarnings("unchecked")
-            @Override
-            public E next() {
-                return (E) elements[currentIndex++];
-            }
-        };
     }
 }
