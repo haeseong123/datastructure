@@ -1,3 +1,5 @@
+package structure;
+
 import java.util.Iterator;
 
 // 고정 크기 배열
