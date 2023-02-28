@@ -4,6 +4,8 @@ import interface_from.List;
 
 import java.util.Iterator;
 
+import static util.MyUtil.myCheckIndex;
+
 public class DynamicArray<E> implements List<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private Object[] elementData;
@@ -35,7 +37,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public void add(int index, E e) {
-        checkIndex(index, size);
+        myCheckIndex(index, size);
         if (size == elementData.length) {
             elementData = grow();
         }
@@ -49,7 +51,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        checkIndex(index, size);
+        myCheckIndex(index, size);
 
         @SuppressWarnings("unchecked")
         E oldValue = (E) elementData[index];
@@ -71,13 +73,13 @@ public class DynamicArray<E> implements List<E> {
     @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
-        checkIndex(index, size);
+        myCheckIndex(index, size);
         return (E) elementData[index];
     }
 
     @Override
     public void set(int index, E e) {
-        checkIndex(index, size);
+        myCheckIndex(index, size);
         elementData[index] = e;
     }
 
@@ -167,13 +169,5 @@ public class DynamicArray<E> implements List<E> {
         if ((size - 1) > index)
             System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
         elementData[size--] = null;
-    }
-
-    private void checkIndex(int index, int size) {
-        if (index < 0) {
-            throw new IndexOutOfBoundsException("index should be bigger than 0");
-        } else if (index >= size) {
-            throw new IndexOutOfBoundsException("index should be within size");
-        }
     }
 }
