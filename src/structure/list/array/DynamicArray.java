@@ -4,7 +4,8 @@ import structure.list.List;
 
 import java.util.Iterator;
 
-import static util.MyUtil.myCheckIndex;
+import static util.MyUtil.checkElementIndex;
+import static util.MyUtil.checkPositionIndex;
 
 public class DynamicArray<E> implements List<E> {
     private static final int DEFAULT_CAPACITY = 10;
@@ -37,7 +38,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public void add(int index, E e) {
-        myCheckIndex(index, size);
+        checkPositionIndex(index, size);
         if (size == elementData.length) {
             elementData = grow();
         }
@@ -51,7 +52,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        myCheckIndex(index, size);
+        checkElementIndex(index, size);
 
         @SuppressWarnings("unchecked")
         E oldValue = (E) elementData[index];
@@ -73,13 +74,13 @@ public class DynamicArray<E> implements List<E> {
     @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
-        myCheckIndex(index, size);
+        checkElementIndex(index, size);
         return (E) elementData[index];
     }
 
     @Override
     public void set(int index, E e) {
-        myCheckIndex(index, size);
+        checkElementIndex(index, size);
         elementData[index] = e;
     }
 

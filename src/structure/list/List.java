@@ -1,6 +1,6 @@
 package structure.list;
 
-public interface List<E> extends Iterable<E>{
+public interface List<E> extends Iterable<E> {
     /**
      * 리스트에 요소 추가
      *
@@ -93,5 +93,5 @@ public interface List<E> extends Iterable<E>{
     /**
      * 리스트의 모든 요소를 삭제
      */
-    public void clear();
+    void clear();
 }

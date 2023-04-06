@@ -2,6 +2,8 @@ package structure.list.array;
 
 import java.util.Iterator;
 
+import static util.MyUtil.checkElementIndex;
+
 // 고정 크기 배열
 public class StaticArray<E> implements Iterable<E> {
     private static final int DEFAULT_CAPACITY = 10;
@@ -27,7 +29,7 @@ public class StaticArray<E> implements Iterable<E> {
 
     // 메서드
     public boolean add(E e) {
-        checkIndex(size, capacity);
+        checkElementIndex(size, capacity);
         elements[size++] = e;
         return true;
     }
@@ -42,7 +44,7 @@ public class StaticArray<E> implements Iterable<E> {
     }
 
     public E remove(int index) {
-        checkIndex(index, size);
+        checkElementIndex(index, size);
         @SuppressWarnings("unchecked") E oldValue = (E) elements[index];
         for (int i = index; i < size - 1; i++) {
             elements[i] = elements[i + 1];
@@ -78,20 +80,12 @@ public class StaticArray<E> implements Iterable<E> {
 
     @SuppressWarnings("unchecked")
     public E get(int index) {
-        checkIndex(index, size);
+        checkElementIndex(index, size);
         return (E) elements[index];
     }
 
     public void clear() {
         size = 0;
-    }
-
-    private void checkIndex(int index, int length) {
-        if (index < 0) {
-            throw new IndexOutOfBoundsException("Index should be up 0");
-        } else if (index >= length) {
-            throw new IndexOutOfBoundsException("Index should be within size");
-        }
     }
 
     @Override

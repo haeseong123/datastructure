@@ -16,7 +16,7 @@ class StaticArrayTest {
             array.add(3);
         });
 
-        assertEquals("Index should be within size", exception.getMessage());
+        assertEquals("Index: 2, Size: 2", exception.getMessage());
     }
 
     @Test
@@ -42,7 +42,7 @@ class StaticArrayTest {
         Throwable exception = assertThrows(IndexOutOfBoundsException.class, () -> {
             array.remove(10);
         });
-        assertEquals("Index should be within size", exception.getMessage());
+        assertEquals("Index: 10, Size: 1", exception.getMessage());
     }
 
     @Test

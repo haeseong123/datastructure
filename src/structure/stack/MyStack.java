@@ -1,5 +1,7 @@
 package structure.stack;
 
+import static util.MyUtil.checkElementIndex;
+
 public class MyStack<E> {
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -23,7 +25,7 @@ public class MyStack<E> {
     }
 
     public E remove(int index) {
-        checkIndex(index, size);
+        checkElementIndex(index, size);
 
         @SuppressWarnings("unchecked")
         E oldValue = (E) elements[index];
@@ -109,22 +111,14 @@ public class MyStack<E> {
     }
 
     private void arrayCopy(Object[] src, int srcPos, Object[] dest, int destPos, int length) {
-        checkIndex(srcPos, src.length);
-        checkIndex(destPos, dest.length);
-        checkIndex(srcPos + length - 1, src.length);
-        checkIndex(destPos + length - 1, dest.length);
+        checkElementIndex(srcPos, src.length);
+        checkElementIndex(destPos, dest.length);
+        checkElementIndex(srcPos + length - 1, src.length);
+        checkElementIndex(destPos + length - 1, dest.length);
 
         for (int i = 0; i < length; i++) {
             dest[destPos + i] = src[srcPos + i];
         }
 
-    }
-
-    private void checkIndex(int index, int size) {
-        if (index < 0) {
-            throw new IndexOutOfBoundsException("");
-        } else if (index >= size) {
-            throw new IndexOutOfBoundsException("");
-        }
     }
 }

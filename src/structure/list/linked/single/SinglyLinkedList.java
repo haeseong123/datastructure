@@ -2,14 +2,12 @@ package structure.list.linked.single;
 
 import structure.list.List;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Iterator;
 
-import static util.MyUtil.myCheckIndex;
+import static util.MyUtil.checkElementIndex;
+import static util.MyUtil.checkPositionIndex;
 
-public class SinglyLinkedList<E> implements List<E>, Cloneable {
+public class SinglyLinkedList<E> implements List<E> {
     private Node<E> first;
     private Node<E> last;
     private int size;
@@ -36,11 +34,11 @@ public class SinglyLinkedList<E> implements List<E>, Cloneable {
 
     @Override
     public void add(int index, E e) {
-        myCheckIndex(index, size);
+        checkPositionIndex(index, size);
 
         if (index == 0) {
             linkFirst(e);
-        } else if (index == (size - 1)) {
+        } else if (index == size) {
             linkLast(e);
         } else {
             linkBetween(e, index);
@@ -49,7 +47,7 @@ public class SinglyLinkedList<E> implements List<E>, Cloneable {
 
     @Override
     public E remove(int index) {
-        myCheckIndex(index, size);
+        checkElementIndex(index, size);
 
         if (index == 0) {
             return unlinkFirst(node(0));
@@ -85,13 +83,13 @@ public class SinglyLinkedList<E> implements List<E>, Cloneable {
 
     @Override
     public E get(int index) {
-        myCheckIndex(index, size);
+        checkElementIndex(index, size);
         return node(index).getData();
     }
 
     @Override
     public void set(int index, E e) {
-        myCheckIndex(index, size);
+        checkElementIndex(index, size);
         node(index).setData(e);
     }
 
@@ -146,85 +144,25 @@ public class SinglyLinkedList<E> implements List<E>, Cloneable {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
-            private Node<E> current = first;
+            private Node<E> next = first;
 
             @Override
             public boolean hasNext() {
-                return current.getNext() != null;
+                return next != null;
             }
 
             @Override
             public E next() {
-                current = current.getNext();
-                return current.getData();
+                E data = next.getData();
+                next = next.getNext();
+                return data;
             }
         };
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        @SuppressWarnings("unchecked")
-        SinglyLinkedList<? super E> clone = (SinglyLinkedList<? super E>) super.clone();
-
-        clone.first = null;
-        clone.last = null;
-        clone.size = 0;
-
-        for (Node<E> x = first; x != null; x = x.getNext()) {
-            clone.addLast(x.getData());
-        }
-
-        return clone;
-    }
-
-    public Object[] toArray() {
-        Object[] array = new Object[size];
-        int idx = 0;
-        for (Node<E> x = first; x != null; x = x.getNext()) {
-            array[idx++] = x.getData();
-        }
-        return array;
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> T[] toArray(T[] a) {
-        if (a.length < size) {
-            a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
-        }
-        int i = 0;
-        Object[] result = a;
-        for (Node<E> x = first; x != null; x = x.getNext()) {
-            result[i++] = x.getData();
-        }
-        return a;
-    }
-
-
-    public void sort() {
-        /**
-         *  Comparator를 넘겨주지 않는 경우 해당 객체의 Comparable에 구현된
-         *  정렬 방식을 사용한다.
-         *  만약 구현되어있지 않으면 cannot be cast to class java.lang.Comparable
-         *  에러가 발생한다.
-         *  만약 구현되어있을 경우 null로 파라미터를 넘기면
-         *  Arrays.sort()가 객체의 compareTo 메소드에 정의된 방식대로 정렬한다.
-         */
-        sort(null);
-    }
-
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public void sort(Comparator<? super E> c) {
-        Object[] a = this.toArray();
-        Arrays.sort(a, (Comparator) c);
-
-        int i = 0;
-        for (Node<E> x = first; x != null; x = x.getNext(), i++) {
-            x.setData((E) a[i]);
-        }
-    }
-
     private Node<E> node(int index) {
-        myCheckIndex(index, size);
+        // assert isElementIndex(index);
+
         Node<E> x = first;
         for (int i = 0; i < index; i++) {
             x = x.getNext();
@@ -234,21 +172,23 @@ public class SinglyLinkedList<E> implements List<E>, Cloneable {
 
     private void linkFirst(E e) {
         first = new Node<>(e, first);
-        size++;
 
         if (first.getNext() == null) {
             last = first;
         }
+        size++;
     }
 
     private void linkLast(E e) {
-        Node<E> node = new Node<>(e);
-        if (size == 0) {
-            first = node;
+        final Node<E> l = last;
+        final Node<E> newNode = new Node<>(e, null);
+        last = newNode;
+
+        if (l == null) {
+            first = newNode;
         } else {
-            last.setNext(node);
+            l.setNext(newNode);
         }
-        last = node;
         size++;
     }
 

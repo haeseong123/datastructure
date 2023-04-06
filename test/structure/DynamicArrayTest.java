@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DynamicArrayTest {
 
     @Test
-    void add() {
+    void testAdd() {
         DynamicArray<String> array = new DynamicArray<>(2);
 
         assertTrue(array.add("banana"));
@@ -18,7 +18,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void addWithIdx() {
+    void testAddWithIdx() {
         DynamicArray<String> array = new DynamicArray<>(2);
         array.add("banana");
         array.add("apple");
@@ -29,7 +29,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void removeByIdx() {
+    void testRemoveByIdx() {
         DynamicArray<String> array = new DynamicArray<>(2);
         array.add("banana");
         array.add("apple");
@@ -40,13 +40,13 @@ class DynamicArrayTest {
         assertEquals("orange", array.remove(1));
 
         Throwable lessException = assertThrows(IndexOutOfBoundsException.class, () -> array.remove(-1));
-        assertEquals("index should be bigger than 0", lessException.getMessage());
+        assertEquals("Index: -1, Size: 1", lessException.getMessage());
         Throwable excessException = assertThrows(IndexOutOfBoundsException.class, () -> array.remove(1000));
-        assertEquals("index should be within size", excessException.getMessage());
+        assertEquals("Index: 1000, Size: 1", excessException.getMessage());
     }
 
     @Test
-    void removeByObj() {
+    void testRemoveByObj() {
         DynamicArray<String> array = new DynamicArray<>(2);
         array.add("banana");
         array.add("apple");
@@ -59,7 +59,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void get() {
+    void testGet() {
         DynamicArray<String> array = new DynamicArray<>(3);
         array.add("banana");
         array.add("apple");
@@ -69,7 +69,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void set() {
+    void testSet() {
         DynamicArray<String> array = new DynamicArray<>(3);
         array.add("banana");
         array.add("apple");
@@ -80,7 +80,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void contains() {
+    void testContains() {
         DynamicArray<Integer> array = new DynamicArray<>();
         array.add(0);
         array.add(1);
@@ -91,7 +91,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void indexOf() {
+    void testIndexOf() {
         DynamicArray<Integer> array = new DynamicArray<>();
         array.add(0);
         array.add(1);
@@ -104,7 +104,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void size() {
+    void testSize() {
         DynamicArray<Integer> array = new DynamicArray<>();
         array.add(0);
         array.add(1);
@@ -116,7 +116,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void isEmpty() {
+    void testIsEmpty() {
         DynamicArray<Integer> array = new DynamicArray<>();
         array.add(0);
         array.add(1);
@@ -128,7 +128,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void clear() {
+    void testClear() {
         DynamicArray<Integer> array = new DynamicArray<>();
         array.add(0);
         array.add(1);
@@ -139,7 +139,7 @@ class DynamicArrayTest {
     }
 
     @Test
-    void iterator() {
+    void testIterator() {
         DynamicArray<Integer> array = new DynamicArray<>();
         array.add(0);
         array.add(1);

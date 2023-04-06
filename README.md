@@ -9,26 +9,26 @@
 
 [자바 컬렉션 프레임워크 (Java Collections Framework)](https://st-lab.tistory.com/142?category=856997)
 
-## 데이터 구조 구현 (구현 중...)
+## 데이터 구조 구현
 
 프로젝트는 다음과 같은 데이터 구조들을 구현합니다.
 
-- List Interface
-  - ArrayList
-  - LinkedList (단일 연결 리스트)
-  - LinkedList (이중 연결 리스트)
+- List Interface 
+  - ArrayList 🌞
+  - LinkedList (단일 연결 리스트) 🌞
+  - LinkedList (이중 연결 리스트) 🌞
 - Stack Interface
-  - Stack
+  - Stack 🌞
 - Queue Interface
-  - ArrayQueue
-  - LinkedListQueue
-  - ArrayDeque
-  - LinkedListDeque
-  - PriorityQueue
-- Set Interface
-  - HashSet
-  - LinkedHashSet
-  - TreeSet
+  - ArrayQueue ⛅
+  - LinkedListQueue ⛅
+  - ArrayDeque ⛅
+  - LinkedListDeque ⛅
+  - PriorityQueue ⛅
+- Set Interface 
+  - HashSet ⛅
+  - LinkedHashSet ⛅
+  - TreeSet ⛅
 
 ## 테스트
 

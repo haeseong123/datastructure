@@ -5,7 +5,7 @@ public class DoubleNode<E> {
     private DoubleNode<E> prev;
     private DoubleNode<E> next;
 
-    DoubleNode(E data, DoubleNode<E> prev, DoubleNode<E> next) {
+    DoubleNode(DoubleNode<E> prev, E data, DoubleNode<E> next) {
         this.data = data;
         this.prev = prev;
         this.next = next;
@@ -25,11 +25,11 @@ public class DoubleNode<E> {
         this.data = data;
     }
 
-    public DoubleNode<E> getPre() {
+    public DoubleNode<E> getPrev() {
         return prev;
     }
 
-    public void setPre(DoubleNode<E> prev) {
+    public void setPrev(DoubleNode<E> prev) {
         this.prev = prev;
     }
 

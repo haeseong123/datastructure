@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MyStackTest {
 
     @Test
-    void push() {
+    void testPush() {
         MyStack<String> stack = new MyStack<>();
         stack.push("banana");
         stack.push("apple");
@@ -17,7 +17,7 @@ class MyStackTest {
     }
 
     @Test
-    void pop() {
+    void testPop() {
         MyStack<String> stack = new MyStack<>();
         stack.push("banana");
         stack.push("apple");
@@ -27,7 +27,7 @@ class MyStackTest {
     }
 
     @Test
-    void removeByObj() {
+    void testRemoveByObj() {
         MyStack<String> stack = new MyStack<>();
         stack.push("banana");
         stack.push("apple");
@@ -38,7 +38,7 @@ class MyStackTest {
     }
 
     @Test
-    void removeByIdx() {
+    void testRemoveByIdx() {
         MyStack<String> stack = new MyStack<>();
         stack.push("banana");
         stack.push("apple");
@@ -49,7 +49,7 @@ class MyStackTest {
     }
 
     @Test
-    void peek() {
+    void testPeek() {
         MyStack<Integer> stack = new MyStack<>();
         stack.push(0);
         stack.push(1);
@@ -66,7 +66,7 @@ class MyStackTest {
     }
 
     @Test
-    void contains() {
+    void testContains() {
         MyStack<Integer> stack = new MyStack<>();
         stack.push(0);
         stack.push(1);
@@ -77,7 +77,7 @@ class MyStackTest {
     }
 
     @Test
-    void indexOf() {
+    void testIndexOf() {
         MyStack<Integer> stack = new MyStack<>();
         stack.push(0);
         stack.push(1);
@@ -89,7 +89,7 @@ class MyStackTest {
     }
 
     @Test
-    void empty() {
+    void testEmpty() {
         MyStack<Integer> stack = new MyStack<>();
         stack.push(0);
         stack.push(1);
