@@ -2,26 +2,73 @@ package structure.stack;
 
 import static util.MyUtil.checkElementIndex;
 
-public class MyStack<E> {
+public class MyStack<E> implements Stack<E> {
     private static final int DEFAULT_CAPACITY = 10;
 
     private Object[] elements;
     private int size;
 
     public MyStack() {
-        size = 0;
         elements = new Object[DEFAULT_CAPACITY];
+        size = 0;
     }
 
-    public void push(E e) {
+    public MyStack(int capacity) {
+        elements = new Object[capacity];
+        size = 0;
+    }
+
+    public E push(E e) {
         if (size >= elements.length) {
             elements = grow();
         }
         elements[size++] = e;
+        return e;
     }
 
     public E pop() {
         return remove(size - 1);
+    }
+
+    @SuppressWarnings("unchecked")
+    public E peek() {
+        checkElementIndex(0, size);
+        return (E) elements[size - 1];
+    }
+
+    @Override
+    public int search(Object o) {
+        if (o == null) {
+            for (int i = size - 1; i >= 0; i--) {
+                if (elements[i] == null) {
+                    return size - i;
+                }
+            }
+        } else {
+            for (int i = size - 1; i >= 0; i--) {
+                if (o.equals(elements[i])) {
+                    return size - i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            elements[i] = null;
+        }
+        size = 0;
+        elements = new Object[DEFAULT_CAPACITY];
+    }
+
+    public boolean empty() {
+        return size <= 0;
     }
 
     public E remove(int index) {
@@ -43,11 +90,6 @@ public class MyStack<E> {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
-    public E peek() {
-        return (E) elements[size - 1];
-    }
-
     public boolean contains(Object o) {
         return indexOf(o) > -1;
     }
@@ -65,14 +107,6 @@ public class MyStack<E> {
         return -1;
     }
 
-    public boolean empty() {
-        return size <= 0;
-    }
-
-    public int size() {
-        return size;
-    }
-
     // index 체크 안 하는 메서드
     private void fastRemove(int index) {
         if ((size - 1) == index) {
@@ -87,6 +121,8 @@ public class MyStack<E> {
 
             // index 기준 오른쪽 복사
             arrayCopy(elements, index + 1, newElements, index, size - index - 1);
+
+            // 교체
             elements = newElements;
             size--;
         }

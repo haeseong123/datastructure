@@ -1,106 +1,105 @@
 package structure;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import structure.stack.MyStack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyStackTest {
+public class MyStackTest {
 
-    @Test
-    void testPush() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
+    private MyStack<Integer> myStack;
 
-        assertEquals(2, stack.size());
+    @BeforeEach
+    void setUp() {
+        myStack = new MyStack<>();
     }
 
     @Test
-    void testPop() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
-
-        assertEquals("apple", stack.pop());
-        assertEquals("banana", stack.pop());
-    }
-
-    @Test
-    void testRemoveByObj() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
-
-        assertTrue(stack.remove("banana"));
-        assertFalse(stack.remove("apple apple"));
-        assertEquals(1, stack.size());
-    }
-
-    @Test
-    void testRemoveByIdx() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
-
-        assertEquals("banana", stack.remove(0));
-        assertEquals("apple", stack.remove(0));
-        assertEquals(0, stack.size());
+    void testPushAndPop() {
+        assertEquals(1, myStack.push(1));
+        assertEquals(2, myStack.push(2));
+        assertEquals(3, myStack.push(3));
+        assertEquals(3, myStack.pop());
+        assertEquals(2, myStack.pop());
+        assertEquals(1, myStack.pop());
     }
 
     @Test
     void testPeek() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
 
-        assertEquals(2, stack.peek());
-        assertEquals(2, stack.pop());
+        assertEquals(3, myStack.peek());
+        assertEquals(3, myStack.size());
+    }
 
-        assertEquals(1, stack.peek());
-        assertEquals(1, stack.pop());
+    @Test
+    void testSearch() {
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
 
-        assertEquals(0, stack.peek());
-        assertEquals(0, stack.pop());
+        assertEquals(3, myStack.search(1));
+        assertEquals(-1, myStack.search(4));
+    }
+
+    @Test
+    void testSize() {
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
+
+        assertEquals(3, myStack.size());
+        myStack.pop();
+        myStack.pop();
+        assertEquals(1, myStack.size());
+    }
+
+    @Test
+    void testClear() {
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
+        myStack.clear();
+
+        assertEquals(0, myStack.size());
+        assertTrue(myStack.empty());
+    }
+
+    @Test
+    void testRemove() {
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
+
+
+        // remove using index
+        assertEquals(3, myStack.remove(2));
+
+        // remove using Obj
+        assertTrue(myStack.remove(Integer.valueOf(1)));
+        assertEquals(1, myStack.size());
     }
 
     @Test
     void testContains() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
 
-        assertTrue(stack.contains(0));
-        assertFalse(stack.contains(1000));
+        assertTrue(myStack.contains(2));
+        assertFalse(myStack.contains(4));
     }
 
     @Test
     void testIndexOf() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
+        myStack.push(1);
+        myStack.push(2);
+        myStack.push(3);
 
-        assertEquals(0, stack.indexOf(0));
-        assertEquals(1, stack.indexOf(1));
-        assertEquals(2, stack.indexOf(2));
-    }
-
-    @Test
-    void testEmpty() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
-
-        assertFalse(stack.empty());
-
-        stack.pop();
-        stack.pop();
-        stack.pop();
-
-        assertTrue(stack.empty());
+        assertEquals(1, myStack.indexOf(2));
+        assertEquals(-1, myStack.indexOf(4));
     }
 }
