@@ -7,6 +7,8 @@
 
 해당 프로젝트는 아래 포스팅을 참고하여 작성하였습니다.
 
+[자바 11 - Collections](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collections.html)
+
 [자바 컬렉션 프레임워크 (Java Collections Framework)](https://st-lab.tistory.com/142?category=856997)
 
 ## 데이터 구조 구현
@@ -19,7 +21,7 @@
   - LinkedList (이중 연결 리스트) 🌞
 - Stack Interface 🌞
   - Stack 🌞
-- Queue Interface ⛅
+- Queue Interface 🌞
   - ArrayQueue ⛅
   - LinkedListQueue ⛅
   - ArrayDeque ⛅
