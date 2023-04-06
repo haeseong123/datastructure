@@ -1,6 +1,6 @@
-package structure;
+package structure.list.linked.single;
 
-import interface_from.List;
+import structure.list.List;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package structure;
+package structure.stack;
 
 public class MyStack<E> {
     private static final int DEFAULT_CAPACITY = 10;

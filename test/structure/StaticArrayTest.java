@@ -1,6 +1,7 @@
 package structure;
 
 import org.junit.jupiter.api.Test;
+import structure.list.array.StaticArray;
 
 import static org.junit.jupiter.api.Assertions.*;
 

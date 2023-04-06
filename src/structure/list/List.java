@@ -1,4 +1,4 @@
-package interface_from;
+package structure.list;
 
 public interface List<E> extends Iterable<E>{
     /**

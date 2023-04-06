@@ -1,9 +1,9 @@
-package structure;
+package structure.list.array;
 
 import java.util.Iterator;
 
 // 고정 크기 배열
-class StaticArray<E> implements Iterable<E> {
+public class StaticArray<E> implements Iterable<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private final int capacity;
     private final Object[] elements;

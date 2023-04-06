@@ -1,6 +1,6 @@
-package structure;
+package structure.list.array;
 
-import interface_from.List;
+import structure.list.List;
 
 import java.util.Iterator;
 

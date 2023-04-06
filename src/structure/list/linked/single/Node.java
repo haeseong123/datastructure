@@ -1,4 +1,4 @@
-package structure;
+package structure.list.linked.single;
 
 public class Node<E> {
     private E data;
