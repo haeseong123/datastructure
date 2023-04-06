@@ -22,7 +22,7 @@
 - Stack Interface 🌞
   - Stack 🌞
 - Queue Interface 🌞
-  - ArrayQueue ⛅
+  - ArrayQueue 🌞
   - LinkedListQueue ⛅
   - ArrayDeque ⛅
   - LinkedListDeque ⛅
@@ -35,7 +35,7 @@
 ## 테스트
 
 프로젝트에서 구현한 데이터 구조들은 JUnit 5를 사용하여 단위 테스트를 수행하였습니다.
-아래는 몇 가지 단위 테스트 코드입니다.
+아래는 몇 가지 단위 테스트 코드의 예시입니다.
 
 #### ArrayList 테스트
 ```java
@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DynamicArrayTest {
 
   @Test
-  void add() {
+  void testAdd() {
     DynamicArray<String> array = new DynamicArray<>(2);
 
     assertTrue(array.add("banana"));
@@ -59,7 +59,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void addWithIdx() {
+  void testAddWithIdx() {
     DynamicArray<String> array = new DynamicArray<>(2);
     array.add("banana");
     array.add("apple");
@@ -70,7 +70,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void removeByIdx() {
+  void testRemoveByIdx() {
     DynamicArray<String> array = new DynamicArray<>(2);
     array.add("banana");
     array.add("apple");
@@ -81,13 +81,13 @@ class DynamicArrayTest {
     assertEquals("orange", array.remove(1));
 
     Throwable lessException = assertThrows(IndexOutOfBoundsException.class, () -> array.remove(-1));
-    assertEquals("index should be bigger than 0", lessException.getMessage());
+    assertEquals("Index: -1, Size: 1", lessException.getMessage());
     Throwable excessException = assertThrows(IndexOutOfBoundsException.class, () -> array.remove(1000));
-    assertEquals("index should be within size", excessException.getMessage());
+    assertEquals("Index: 1000, Size: 1", excessException.getMessage());
   }
 
   @Test
-  void removeByObj() {
+  void testRemoveByObj() {
     DynamicArray<String> array = new DynamicArray<>(2);
     array.add("banana");
     array.add("apple");
@@ -100,7 +100,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void get() {
+  void testGet() {
     DynamicArray<String> array = new DynamicArray<>(3);
     array.add("banana");
     array.add("apple");
@@ -110,7 +110,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void set() {
+  void testSet() {
     DynamicArray<String> array = new DynamicArray<>(3);
     array.add("banana");
     array.add("apple");
@@ -121,7 +121,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void contains() {
+  void testContains() {
     DynamicArray<Integer> array = new DynamicArray<>();
     array.add(0);
     array.add(1);
@@ -132,7 +132,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void indexOf() {
+  void testIndexOf() {
     DynamicArray<Integer> array = new DynamicArray<>();
     array.add(0);
     array.add(1);
@@ -145,7 +145,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void size() {
+  void testSize() {
     DynamicArray<Integer> array = new DynamicArray<>();
     array.add(0);
     array.add(1);
@@ -157,7 +157,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void isEmpty() {
+  void testIsEmpty() {
     DynamicArray<Integer> array = new DynamicArray<>();
     array.add(0);
     array.add(1);
@@ -169,7 +169,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void clear() {
+  void testClear() {
     DynamicArray<Integer> array = new DynamicArray<>();
     array.add(0);
     array.add(1);
@@ -180,7 +180,7 @@ class DynamicArrayTest {
   }
 
   @Test
-  void iterator() {
+  void testIterator() {
     DynamicArray<Integer> array = new DynamicArray<>();
     array.add(0);
     array.add(1);
@@ -200,112 +200,111 @@ class DynamicArrayTest {
 ```java
 package structure;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import structure.stack.MyStack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyStackTest {
+public class MyStackTest {
 
-    @Test
-    void push() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
+  private MyStack<Integer> myStack;
 
-        assertEquals(2, stack.size());
-    }
+  @BeforeEach
+  void setUp() {
+    myStack = new MyStack<>();
+  }
 
-    @Test
-    void pop() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
+  @Test
+  void testPushAndPop() {
+    assertEquals(1, myStack.push(1));
+    assertEquals(2, myStack.push(2));
+    assertEquals(3, myStack.push(3));
+    assertEquals(3, myStack.pop());
+    assertEquals(2, myStack.pop());
+    assertEquals(1, myStack.pop());
+  }
 
-        assertEquals("apple", stack.pop());
-        assertEquals("banana", stack.pop());
-    }
+  @Test
+  void testPeek() {
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
 
-    @Test
-    void removeByObj() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
+    assertEquals(3, myStack.peek());
+    assertEquals(3, myStack.size());
+  }
 
-        assertTrue(stack.remove("banana"));
-        assertFalse(stack.remove("apple apple"));
-        assertEquals(1, stack.size());
-    }
+  @Test
+  void testSearch() {
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
 
-    @Test
-    void removeByIdx() {
-        MyStack<String> stack = new MyStack<>();
-        stack.push("banana");
-        stack.push("apple");
+    assertEquals(3, myStack.search(1));
+    assertEquals(-1, myStack.search(4));
+  }
 
-        assertEquals("banana", stack.remove(0));
-        assertEquals("apple", stack.remove(0));
-        assertEquals(0, stack.size());
-    }
+  @Test
+  void testSize() {
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
 
-    @Test
-    void peek() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
+    assertEquals(3, myStack.size());
+    myStack.pop();
+    myStack.pop();
+    assertEquals(1, myStack.size());
+  }
 
-        assertEquals(2, stack.peek());
-        assertEquals(2, stack.pop());
+  @Test
+  void testClear() {
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
+    myStack.clear();
 
-        assertEquals(1, stack.peek());
-        assertEquals(1, stack.pop());
+    assertEquals(0, myStack.size());
+    assertTrue(myStack.empty());
+  }
 
-        assertEquals(0, stack.peek());
-        assertEquals(0, stack.pop());
-    }
+  @Test
+  void testRemove() {
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
 
-    @Test
-    void contains() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
 
-        assertTrue(stack.contains(0));
-        assertFalse(stack.contains(1000));
-    }
+    // remove using index
+    assertEquals(3, myStack.remove(2));
 
-    @Test
-    void indexOf() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
+    // remove using Obj
+    assertTrue(myStack.remove(Integer.valueOf(1)));
+    assertEquals(1, myStack.size());
+  }
 
-        assertEquals(0, stack.indexOf(0));
-        assertEquals(1, stack.indexOf(1));
-        assertEquals(2, stack.indexOf(2));
-    }
+  @Test
+  void testContains() {
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
 
-    @Test
-    void empty() {
-        MyStack<Integer> stack = new MyStack<>();
-        stack.push(0);
-        stack.push(1);
-        stack.push(2);
+    assertTrue(myStack.contains(2));
+    assertFalse(myStack.contains(4));
+  }
 
-        assertFalse(stack.empty());
+  @Test
+  void testIndexOf() {
+    myStack.push(1);
+    myStack.push(2);
+    myStack.push(3);
 
-        stack.pop();
-        stack.pop();
-        stack.pop();
-
-        assertTrue(stack.empty());
-    }
+    assertEquals(1, myStack.indexOf(2));
+    assertEquals(-1, myStack.indexOf(4));
+  }
 }
 ```
 
 ## 문의 사항
 
-이 프로젝트에 대한 문의 사항이 있다면 Issues 탭에서 질문을 남겨주세요!
+프로젝트에 대한 문의 사항이 있다면 Issues 탭에서 질문을 남겨주세요!
