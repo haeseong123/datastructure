@@ -2,7 +2,7 @@ package structure;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import structure.queue.linked.LinkedQueue;
+import structure.queue.linked.single.LinkedQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

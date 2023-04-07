@@ -1,4 +1,4 @@
-package structure.queue.linked;
+package structure.queue.linked.single;
 
 import structure.queue.Queue;
 

@@ -1,4 +1,4 @@
-package structure.queue.linked;
+package structure.queue.linked.single;
 
 public class LinkedQueueNode<E> {
     private E data;
