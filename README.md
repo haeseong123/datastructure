@@ -1,15 +1,12 @@
-# 데이터 구조 프로젝트
+# 데이터 구조
 
 이 프로젝트는 다양한 데이터 구조들의 예시 코드를 제공하는 프로젝트입니다. 
+
 데이터 구조들의 예시 코드는 Java를 사용하여 List, Stack, Queue, Deque, Hash 등의 다양한 데이터 구조를 구현한 것을 포함합니다. 
+
 예시 코드는 해당 데이터 구조를 활용하여 데이터의 추가, 삭제, 검색, 정렬 등을 수행하는 예시를 제공합니다. 
+
 예시 코드를 참고하여 데이터 구조의 사용 방법과 예시를 확인하고, 필요에 따라 프로젝트에 적용할 수 있습니다.
-
-해당 프로젝트는 아래 포스팅을 참고하여 작성하였습니다.
-
-[자바 11 - Collections](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collections.html)
-
-[자바 컬렉션 프레임워크 (Java Collections Framework)](https://st-lab.tistory.com/142?category=856997)
 
 ## 데이터 구조 구현
 
@@ -29,7 +26,7 @@
   - Heap 🌞
     - PriorityQueue 🌞
 - Set Interface 🌞
-  - HashSet ⛅
+  - HashSet 🌞
   - LinkedHashSet ⛅
   - TreeSet ⛅
 
@@ -309,3 +306,11 @@ public class MyStackTest {
 ## 문의 사항
 
 프로젝트에 대한 문의 사항이 있다면 Issues 탭에서 질문을 남겨주세요!
+
+## 참고 자료
+
+해당 프로젝트는 아래 포스팅을 참고하여 작성하였습니다.
+
+[자바 11 - Collections](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collections.html)
+
+[자바 컬렉션 프레임워크 (Java Collections Framework)](https://st-lab.tistory.com/142?category=856997)
