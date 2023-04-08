@@ -1,4 +1,6 @@
-package structure.stack;
+package structure.stack.mystack;
+
+import structure.stack.Stack;
 
 import static util.MyUtil.checkElementIndex;
 

@@ -2,7 +2,7 @@ package structure;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import structure.stack.MyStack;
+import structure.stack.mystack.MyStack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
