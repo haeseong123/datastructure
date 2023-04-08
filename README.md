@@ -27,7 +27,7 @@
     - PriorityQueue 🌞
 - Set Interface 🌞
   - HashSet 🌞
-  - LinkedHashSet ⛅
+  - LinkedHashSet 🌞
   - TreeSet ⛅
 
 ## 테스트

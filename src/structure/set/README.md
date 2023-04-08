@@ -9,10 +9,18 @@ TreeSet입니다.
 HashSet은 Set 인터페이스를 구현한 클래스 중 가장 일반적으로 사용되는 클래스입니다. HashSet은 순서가 없는 컬렉션으로, 데이터를 해시 함수를 사용하여 저장합니다. HashSet은 데이터를 빠르게 추가,
 삭제, 검색할 수 있어, 대량의 데이터를 처리할 때 효율적입니다. 하지만, 데이터의 **순서를 보장하지 않기** 때문에 순서에 따른 처리가 필요한 경우에는 다른 클래스를 선택해야 합니다.
 
+아래 사진을 참고해주세요.
+
+![hash_set](https://user-images.githubusercontent.com/50406129/230717163-f0511bbe-b881-41fb-9524-245d46b2baaa.png)
+
 ### LinkedHashSet
 
 LinkedHashSet은 HashSet의 확장된 형태로, 데이터의 **순서를 보장**하는 특징이 있습니다. 데이터가 추가된 순서대로 저장되기 때문에, 저장된 순서대로 데이터를 순회할 수 있습니다.
 LinkedHashSet은 데이터의 순서가 중요한 경우에 사용될 수 있습니다. 하지만, HashSet보다는 약간의 성능 저하가 발생할 수 있습니다.
+
+아래 사진을 참고해주세요.
+
+![linked_hash_set](https://user-images.githubusercontent.com/50406129/230717113-01585a5f-3434-439b-8f17-05c4e487ce41.png)
 
 ### TreeSet
 

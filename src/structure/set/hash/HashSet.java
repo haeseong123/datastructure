@@ -88,10 +88,10 @@ public class HashSet<E> implements Set<E> {
     @Override
     public void clear() {
         if (table != null && table.length > 0 && size > 0) {
-            for (HashSetNode<E> x = table[0]; x != null; ) {
-                HashSetNode<E> next = x.getNext();
-                x.setNext(null);
-                x = next;
+            for (int i = 0; i < table.length; i++) {
+                if (table[i] == null) continue;
+                table[i].setNext(null);
+                table[i] = null;
             }
             size = 0;
         }
